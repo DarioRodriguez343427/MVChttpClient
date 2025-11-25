@@ -22,7 +22,11 @@ namespace ClienteHttpMVC.Controllers
                 return RedirectToAction("Login", "Login");
             }
 
-            if (ObtenerRol() != "Administrador") ViewBag.Error = "Su rol no esta autorizado a realizar esta operacion";
+            if (ObtenerRol() != "Administrador")
+            {
+                ViewBag.Rol = "Su rol no esta autorizado a realizar esta operacion";
+                return View();
+            }
 
             IEnumerable<LogDTO> lista = new List<LogDTO>();
 

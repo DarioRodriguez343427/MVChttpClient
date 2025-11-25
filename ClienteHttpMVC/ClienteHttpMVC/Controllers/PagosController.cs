@@ -4,6 +4,7 @@ using ClienteHttpMVC.DTO;
 using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NuGet.Common;
 using Presentacion.Controllers;
 
 namespace ClienteHttpMVC.Controllers
@@ -38,27 +39,8 @@ namespace ClienteHttpMVC.Controllers
                 return RedirectToAction("Login", "Login");
             }
 
-            IEnumerable<TipoGastoDTO> listado = null;
-            try
-            {
-                string token = HttpContext.Session.GetString("token");
-                var resultado = AuxiliarClienteHttp.EnviarSolicitud(URLApiTipoGastos, "GET", null, token);
-                string body = AuxiliarClienteHttp.ObtenerBody(resultado);
-
-                if (resultado.IsSuccessStatusCode)
-                {
-                    listado = JsonConvert.DeserializeObject<IEnumerable<TipoGastoDTO>>(body);
-                    ViewBag.TiposDeGasto = listado;
-                }
-                else
-                {
-                    ViewBag.Mensaje = body;
-                }
-            }
-            catch (Exception)
-            {
-                ViewBag.Mensaje = "Ha ocurrido un error inesperado";
-            }
+            string token = HttpContext.Session.GetString("token");
+            CargarTiposDeGasto(token, URLApiTipoGastos);
 
             return View();
         }
@@ -87,8 +69,9 @@ namespace ClienteHttpMVC.Controllers
                 }
                 else
                 {
-                    string body = AuxiliarClienteHttp.ObtenerBody(resultado);
-                    ViewBag.Mensaje = body;
+                    ViewBag.Mensaje = "Verifique informacion ingresada";
+
+                    CargarTiposDeGasto(token, URLApiTipoGastos);
                 }
             }
             catch (Exception)
@@ -96,6 +79,7 @@ namespace ClienteHttpMVC.Controllers
                 ViewBag.Mensaje = "Ha ocurrido un error inesperado";
             }
 
+            
             return View(dto);
         }
         /* ------------------------FIN PAGO UNICO ------------------------------*/
@@ -109,27 +93,9 @@ namespace ClienteHttpMVC.Controllers
                 return RedirectToAction("Login", "Login");
             }
 
-            IEnumerable<TipoGastoDTO> listado = null;
-            try
-            {
-                string token = HttpContext.Session.GetString("token");
-                var resultado = AuxiliarClienteHttp.EnviarSolicitud(URLApiTipoGastos, "GET", null, token);
-                string body = AuxiliarClienteHttp.ObtenerBody(resultado);
+            string token = HttpContext.Session.GetString("token");
 
-                if (resultado.IsSuccessStatusCode)
-                {
-                    listado = JsonConvert.DeserializeObject<IEnumerable<TipoGastoDTO>>(body);
-                    ViewBag.TiposDeGasto = listado;
-                }
-                else
-                {
-                    ViewBag.Mensaje = body;
-                }
-            }
-            catch (Exception)
-            {
-                ViewBag.Mensaje = "Ha ocurrido un error inesperado";
-            }
+            CargarTiposDeGasto(token, URLApiTipoGastos);
 
             return View();
         }
@@ -158,8 +124,9 @@ namespace ClienteHttpMVC.Controllers
                 }
                 else
                 {
-                    string body = AuxiliarClienteHttp.ObtenerBody(resultado);
-                    ViewBag.Mensaje = body;
+                    ViewBag.Mensaje = "Verifique informacion ingresada";
+
+                    CargarTiposDeGasto(token, URLApiTipoGastos);
                 }
             }
             catch (Exception)

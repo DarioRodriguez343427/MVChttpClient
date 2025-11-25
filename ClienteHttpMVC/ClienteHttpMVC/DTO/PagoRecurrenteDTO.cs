@@ -6,7 +6,9 @@ namespace ClienteHttpMVC.DTO
     public class PagoRecurrenteDTO
     {
         public int Id { get; set; }
+
         [Display(Name = "Tipo de gasto")]
+        [Required(ErrorMessage = "Debe seleccionar un tipo de pago")]
         public int IdTipoDeGasto { get; set; }
 
         [Display(Name = "Metodo de pago")]
