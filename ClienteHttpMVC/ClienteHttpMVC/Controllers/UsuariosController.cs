@@ -118,7 +118,7 @@ namespace ClienteHttpMVC.Controllers
                 if (respuesta.IsSuccessStatusCode)
                 {
                     ListadoUsuariosDTO dtoUsuario = JsonConvert.DeserializeObject<ListadoUsuariosDTO>(body);
-                    ViewBag.Mensaje = "Se reseteo la siguiente clave para el usuario inidicado: " + dtoUsuario.Contrasena;
+                    ViewBag.Mensaje = "Contraseña reseteada, la nueva contraseña es: " + dtoUsuario.Contrasena;
 
                     var resultado2 = AuxiliarClienteHttp.EnviarSolicitud(URLApiUsuarios + "/" + dto.Id, "GET", null, token);
                     string body2 = AuxiliarClienteHttp.ObtenerBody(resultado2);
