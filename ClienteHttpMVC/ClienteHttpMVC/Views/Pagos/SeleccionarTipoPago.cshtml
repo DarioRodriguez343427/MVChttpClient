@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Seleccionar tipo de pago";
+}
+
+<h2>Selecciona el tipo de pago</h2>
+
+<div class="d-flex gap-3 mt-4">
+    <form asp-controller="Pagos" asp-action="CreatePagoUnico" method="get">
+        <button type="submit" class="btn btn-primary">Pago Único</button>
+    </form>
+
+    <form asp-controller="Pagos" asp-action="CreatePagoRecurrente" method="get">
+        <button type="submit" class="btn btn-success">Pago Recurrente</button>
+    </form>
+</div>

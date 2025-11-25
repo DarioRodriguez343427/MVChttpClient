@@ -1,0 +1,66 @@
+﻿@model ClienteHttpMVC.DTO.PagoRecurrenteDTO
+
+@{
+    ViewData["Title"] = "CreatePagoRecurrente";
+}
+
+<h1>Registrar pago recurrente</h1>
+<span style="color:red">@ViewBag.mensaje</span>
+
+@if(ViewBag.TiposDeGasto != null)
+{
+    <h4>Ingrese la información solicitada para agregar un nuevo pago recurrente</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CreatePagoRecurrente">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <label asp-for="IdTipoDeGasto" class="control-label"></label>
+                <select asp-for="IdTipoDeGasto" class="form-control">
+                    <option value="0" selected disabled>-- Seleccione tipo de gasto --</option>
+                    @foreach (var gasto in ViewBag.TiposDeGasto)
+                    {
+                        <option value="@gasto.Id">@gasto.Nombre</option>
+                    }
+                </select>
+                <div class="form-group">
+                    <label asp-for="MetodoDePago" class="control-label"></label>
+                    <select asp-for="MetodoDePago" class="form-control">
+                        <option value="0" selected disabled>-- Seleccione método de pago --</option>
+                        <option value="1">Efectivo</option>
+                        <option value="2">Crédito</option>
+                    </select>
+                    <span asp-validation-for="MetodoDePago" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Monto" class="control-label"></label>
+                    <input asp-for="Monto" class="form-control" />
+                    <span asp-validation-for="Monto" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descripcion" class="control-label"></label>
+                    <input asp-for="Descripcion" class="form-control" />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaDesde" class="control-label"></label>
+                    <input asp-for="FechaDesde" type="date" class="form-control" />
+                    <span asp-validation-for="FechaDesde" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FechaHasta" class="control-label"></label>
+                    <input asp-for="FechaHasta" type="date" class="form-control" />
+                    <span asp-validation-for="FechaHasta" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Agregar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+<div>
+    <a asp-action="SeleccionarTipoPago">Volver</a>
+</div>
+
