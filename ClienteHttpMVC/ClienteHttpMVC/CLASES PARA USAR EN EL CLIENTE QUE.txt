@@ -1,0 +1,45 @@
+CLASES PARA USAR EN EL CLIENTE QUE CONSUME LA API:
+==================================================
+(instalar pquete NuGet: Microsoft.AspNet.WebApi.Client)
+
+
+HttpClient 
+
+.GetAsync(url:string): Task<HttpResponseMessage>
+.DeleteAsync(url:string): Task<HttpResponseMessage>
+.PostAsJsonAsync(url:string, obj:object): Task<HttpResponseMessage>
+.PutAsJsonAsync(url:string, obj:object): Task<HttpResponseMessage>
+
+
+Task<T>
+
+.Wait()
+.Result: T
+
+
+HttpResponseMessage
+
+.IsSuccessStatusCode: bool
+.Content: HttpContent
+
+
+HttpContent
+
+.ReadAsStringAsync(): Task<string>
+
+
+JsonConvert
+
+.DeserializeObject<T>(json:string): T
+
+todos los async siempre devuelven un task, despues se hace el wait hasta que la tarea finalice
+y despues ya recibimos lo que pide el task, por ejemplo un string que es el body, que est string es una cadena de texto que es un json.. 
+
+si esta todo bien recibimos un json, y ahi lo convertimos con jsonConvert y lo deserializamos con DeserializeObject.
+
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ClienteHttpMVC.DTO.LogDTO>
+
+@{
+    ViewData["Title"] = "ListarAuditorias";
+}
+
+<h1>Listado de auditorías por tipo de gasto</h1>
+<h4 style="font-style:italic">
+    Ingrese el ID del tipo de gasto para ver las auditorías relacionadas
+</h4>
+
+@if (ViewBag.Error != null)
+{
+    <h3 style="color: red">@ViewBag.Error</h3>
+}
+else
+{
+    <form asp-action="ListarAuditorias" method="get" class="mb-3">
+        <input type="number" name="id" class="form-control"/>
+        <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+    </form>
+
+    @if (Model == null || !Model.Any())
+    {
+        <p>No hay resultados.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.TipoDeGastoId)</th>
+                    <th>@Html.DisplayNameFor(model => model.TipoDeGasto)</th>
+                    <th>@Html.DisplayNameFor(model => model.Detalle)</th>
+                    <th>@Html.DisplayNameFor(model => model.Fecha)</th>
+                    <th>@Html.DisplayNameFor(model => model.UsuarioId)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.TipoDeGastoId</td>
+                        <td>@item.TipoDeGasto</td>
+                        <td>@item.Detalle</td>
+                        <td>@item.Fecha</td>
+                        <td>@item.UsuarioId</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
