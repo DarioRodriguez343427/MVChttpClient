@@ -31,7 +31,7 @@ namespace ClienteHttpMVC.Controllers
             }
             else if (ObtenerRol() != "Administrador")
             {
-                ViewBag.Rol = "Su rol no permite realizar esta operación";
+                ViewBag.Error = "Su rol no permite realizar esta operación";
                 return View();
             }
 
@@ -67,7 +67,7 @@ namespace ClienteHttpMVC.Controllers
             }
             else if (ObtenerRol() != "Administrador")
             {
-                ViewBag.Rol = "Su rol no permite realizar esta operación";
+                ViewBag.Error = "Su rol no permite realizar esta operación";
                 return View();
             }
 
@@ -105,7 +105,7 @@ namespace ClienteHttpMVC.Controllers
             }
             else if (ObtenerRol() != "Administrador")
             {
-                ViewBag.Rol = "Su rol no permite realizar esta operación";
+                ViewBag.Error = "Su rol no permite realizar esta operación";
                 return View();
             }
 

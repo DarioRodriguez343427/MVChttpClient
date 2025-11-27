@@ -13,7 +13,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
 
-                @if (Context.Session.GetString("Rol") == null)
+                @if (Context.Session.GetString("rol") == null)
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Login">Gestion de pagos</a>
                 }
@@ -22,32 +22,47 @@
                     <a class="navbar-brand" asp-area="" asp-controller="Usuarios" asp-action="Index">Gestion de pagos</a>
                 }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Pagos" asp-action="listadoPagos">Listar Pagos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Pagos" asp-action="SeleccionarTipoPago">crear pago</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="ListarUsuarios">Reseteo de password</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Equipos" asp-action="ListarEquiposSegunMonto">Listar equipos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Auditorias" asp-action="listarAuditorias">Listar auditorias</a>
-                        </li>
+                        @if (Context.Session.GetString("rol") == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Logout">Logout</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Pagos" asp-action="SeleccionarTipoPago">crear pago</a>
+                            </li>
+                            if (Context.Session.GetString("rol") == "Administrador")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="ListarUsuarios">Reseteo de password</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Auditorias" asp-action="listarAuditorias">Listar auditorias</a>
+                                </li>
+                            }
+                            else if (Context.Session.GetString("rol") != "Administrador")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Pagos" asp-action="listadoPagos">Listar Pagos</a>
+                                </li>
+                            }
+                            else if (Context.Session.GetString("rol") == "Gerente")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Equipos" asp-action="ListarEquiposSegunMonto">Listar equipos</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
