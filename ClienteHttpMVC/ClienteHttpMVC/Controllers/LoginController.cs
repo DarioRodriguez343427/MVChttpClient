@@ -10,9 +10,17 @@ namespace ClienteHttpMVC.Controllers
     public class LoginController : BaseController
     {
         private string URLApiUsuarios { get; set; }
-        public LoginController(IConfiguration config)
+        public LoginController(IConfiguration config, IWebHostEnvironment env)
         {
-            URLApiUsuarios = config.GetValue<string>("URLApiUsuarios");
+            if (env.IsDevelopment())
+            {
+                URLApiUsuarios = config.GetValue<string>("URLApiUsuarios");
+            }
+
+            if (env.IsProduction())
+            {
+                URLApiUsuarios = config.GetValue<string>("URLApiUsuariosAZURE");
+            }
         }
 
         public IActionResult Logout()

@@ -14,10 +14,19 @@ namespace ClienteHttpMVC.Controllers
         public string URLApiPagos { get; set; }
         public string URLApiTipoGastos { get; set; }
 
-        public PagosController(IConfiguration config)
+        public PagosController(IConfiguration config, IWebHostEnvironment env)
         {
-            URLApiPagos = config.GetValue<string>("URLApiPagos");
-            URLApiTipoGastos = config.GetValue<string>("URLApiTipoGastos");
+            if (env.IsDevelopment())
+            {
+                URLApiPagos = config.GetValue<string>("URLApiPagos");
+                URLApiTipoGastos = config.GetValue<string>("URLApiTipoGastos");
+            }
+
+            if (env.IsProduction())
+            {
+                URLApiPagos = config.GetValue<string>("URLApiPagosAZURE");
+                URLApiTipoGastos = config.GetValue<string>("URLApiTipoGastosAZURE");
+            }
         }
 
         [HttpGet]

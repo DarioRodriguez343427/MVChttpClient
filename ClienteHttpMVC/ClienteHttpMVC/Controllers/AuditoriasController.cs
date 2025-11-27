@@ -10,9 +10,17 @@ namespace ClienteHttpMVC.Controllers
     {
         private string URLApiAuditorias { get; set; }
 
-        public AuditoriasController(IConfiguration config)
+        public AuditoriasController(IConfiguration config, IWebHostEnvironment env)
         {
-            URLApiAuditorias = config.GetValue<string>("URLApiAuditorias");
+            if (env.IsDevelopment())
+            {
+                URLApiAuditorias = config.GetValue<string>("URLApiAuditorias");
+            }
+
+            if (env.IsProduction())
+            {
+                URLApiAuditorias = config.GetValue<string>("URLApiAuditoriasAZURE");
+            }
         }
 
         public IActionResult ListarAuditorias(int? id)
