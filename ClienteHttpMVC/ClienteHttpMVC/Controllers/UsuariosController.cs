@@ -9,9 +9,18 @@ namespace ClienteHttpMVC.Controllers
     public class UsuariosController : BaseController
     {
         private string URLApiUsuarios { get; set; }
-        public UsuariosController(IConfiguration config)
+        public UsuariosController(IConfiguration config, IWebHostEnvironment env)
         {
-            URLApiUsuarios = config.GetValue<string>("URLApiUsuarios");
+            if (env.IsDevelopment())
+            {
+                URLApiUsuarios = config.GetValue<string>("URLApiUsuarios");
+
+            }
+
+            if (env.IsProduction())
+            {
+                URLApiUsuarios = config.GetValue<string>("URLApiUsuariosAZURE");
+            }
         }
 
         //GET: usuariosController

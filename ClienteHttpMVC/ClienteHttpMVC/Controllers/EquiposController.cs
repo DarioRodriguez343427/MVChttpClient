@@ -10,9 +10,17 @@ namespace ClienteHttpMVC.Controllers
     {
         private string URLApiEquipos { get; set; }
 
-        public EquiposController(IConfiguration config)
+        public EquiposController(IConfiguration config, IWebHostEnvironment env)
         {
-            URLApiEquipos = config.GetValue<string>("URLApiEquipos");
+            if (env.IsDevelopment())
+            {
+                URLApiEquipos = config.GetValue<string>("URLApiEquipos");
+            }
+
+            if (env.IsProduction())
+            {
+                URLApiEquipos = config.GetValue<string>("URLApiEquiposAZURE");
+            }
         }
 
 
