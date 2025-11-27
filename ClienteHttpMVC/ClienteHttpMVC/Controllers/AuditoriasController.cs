@@ -24,7 +24,7 @@ namespace ClienteHttpMVC.Controllers
 
             if (ObtenerRol() != "Administrador")
             {
-                ViewBag.Rol = "Su rol no esta autorizado a realizar esta operacion";
+                ViewBag.Error = "Su rol no esta autorizado a realizar esta operacion";
                 return View();
             }
 
